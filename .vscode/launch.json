@@ -1,0 +1,107 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Torizon AMD64",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${config:torizon_app_root}/EffectsDemoDRM",
+            "cwd": "${config:torizon_app_root}",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                //"AVALONIA_DRM": "true"
+                "AVALONIA_FB": "true"
+            },
+            "args": [],
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "ssh",
+                "pipeArgs": [
+                    "-T",
+                    "-q",
+                    "-p",
+                    "${config:torizon_debug_ssh_port}",
+                    "-i",
+                    "${workspaceFolder}/.conf/id_rsa", // ssh key path
+                    "-o",
+                    "StrictHostKeyChecking=no",
+                    "-o",
+                    "UserKnownHostsFile /dev/null",
+                    "${config:torizon_run_as}@${config:torizon_ip}" // user@device
+                ],
+                "debuggerPath": "/vsdbg/vsdbg"
+            },
+            "preLaunchTask": "deploy-torizon-amd64",
+            "postDebugTask": "stop-torizon-amd64"
+        },
+        {
+            "name": "Torizon ARMv7",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${config:torizon_app_root}/EffectsDemoDRM",
+            "cwd": "${config:torizon_app_root}",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                //"AVALONIA_DRM": "true"
+                "AVALONIA_FB": "true"
+            },
+            "args": [],
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "ssh",
+                "pipeArgs": [
+                    "-T",
+                    "-q",
+                    "-p",
+                    "${config:torizon_debug_ssh_port}",
+                    "-i",
+                    "${workspaceFolder}/.conf/id_rsa", // ssh key path
+                    "-o",
+                    "StrictHostKeyChecking=no",
+                    "-o",
+                    "UserKnownHostsFile /dev/null",
+                    "${config:torizon_run_as}@${config:torizon_ip}" // user@device
+                ],
+                "debuggerPath": "/vsdbg/vsdbg"
+            },
+            "preLaunchTask": "deploy-torizon-arm",
+            "postDebugTask": "stop-torizon-arm"
+        },
+        {
+            "name": "Torizon ARMv8",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${config:torizon_app_root}/EffectsDemoDRM",
+            "cwd": "${config:torizon_app_root}",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                "AVALONIA_DRM": "true"
+                // "AVALONIA_FB": "true"
+            },
+            "args": [],
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "ssh",
+                "pipeArgs": [
+                    "-T",
+                    "-q",
+                    "-p",
+                    "${config:torizon_debug_ssh_port}",
+                    "-i",
+                    "${workspaceFolder}/.conf/id_rsa", // ssh key path
+                    "-o",
+                    "StrictHostKeyChecking=no",
+                    "-o",
+                    "UserKnownHostsFile /dev/null",
+                    "${config:torizon_run_as}@${config:torizon_ip}" // user@device
+                ],
+                "debuggerPath": "/vsdbg/vsdbg"
+            },
+            "preLaunchTask": "deploy-torizon-arm64",
+            "postDebugTask": "stop-torizon-arm64"
+        },
+    ]
+}

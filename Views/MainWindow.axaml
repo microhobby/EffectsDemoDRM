@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:EffectsDemoDRM.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="800"
+        x:Class="EffectsDemoDRM.Views.MainWindow"
+        xmlns:effectsDemo="clr-namespace:EffectsDemo"
+        x:DataType="vm:MainWindowViewModel">
+
+    <StackPanel
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Spacing="20">
+
+        <TextBlock
+            Text="Avalonia Skia Shader Demo"
+            FontWeight="Bold"
+            FontSize="30"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"/>
+
+        <Grid
+            Width="512"
+            Height="512"
+            Background="Black">
+            <effectsDemo:DrawControl
+               Name="Shader" />
+        </Grid>
+
+        <Button
+            Name="ButtonStartShader"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            FontSize="30"
+            Width="220"
+            Height="80"
+            Content="PLAY"/>
+
+    </StackPanel>
+
+</UserControl>

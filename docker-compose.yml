@@ -1,0 +1,67 @@
+version: "3.9"
+services:
+  effects-demo-drm-debug:
+    build:
+        context: .
+        dockerfile: Dockerfile.debug
+    image: ${LOCAL_REGISTRY}:5002/effects-demo-drm:${TAG}
+    # Required to get udev events from host udevd via netlink
+    network_mode: host
+    volumes:
+      - type: bind
+        source: /tmp
+        target: /tmp
+      - type: bind
+        source: /dev
+        target: /dev
+      - type: bind
+        source: /run/udev
+        target: /run/udev
+    cap_add:
+      - CAP_SYS_TTY_CONFIG
+    # Add device access rights through cgroup...
+    device_cgroup_rules:
+      # ... for tty0
+      - "c 4:0 rmw"
+      # ... for tty7
+      - "c 4:7 rmw"
+      # ... for /dev/input devices
+      - "c 13:* rmw"
+      # ... for /dev/dri devices
+      - "c 226:* rmw"
+      - "c 199:* rmw"
+      # ... for /dev/fb0
+      - "c 29:* rmw"
+
+  effects-demo-drm:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    image: ${DOCKER_LOGIN}/effects-demo-drm:${TAG}
+    # Required to get udev events from host udevd via netlink
+    network_mode: host
+    volumes:
+      - type: bind
+        source: /tmp
+        target: /tmp
+      - type: bind
+        source: /dev
+        target: /dev
+      - type: bind
+        source: /run/udev
+        target: /run/udev
+    cap_add:
+      - CAP_SYS_TTY_CONFIG
+    # Add device access rights through cgroup...
+    device_cgroup_rules:
+      # ... for tty0
+      - "c 4:0 rmw"
+      # ... for tty7
+      - "c 4:7 rmw"
+      # ... for /dev/input devices
+      - "c 13:* rmw"
+      # ... for /dev/dri devices
+      - "c 226:* rmw"
+      - "c 199:* rmw"
+      # ... for /dev/fb0
+      - "c 29:* rmw"
